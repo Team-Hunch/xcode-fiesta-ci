@@ -23,3 +23,5 @@ http
         })
     })
     .listen(process.env.PORT || 3000)
+
+console.log('Waiting for webhooks....')
