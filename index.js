@@ -2,17 +2,35 @@
 
 require('dotenv').load()
 
-const secret = process.env.SECRET || 'keyboardcat'
+const debug = require('debug')('fiestaci:core')
+
+const secret = process.env.WEBHOOK_SECRET || 'keyboardcat'
 const http = require('http')
 const createHandler = require('github-webhook-handler')
 const handler = createHandler({ path: '/webhook', secret: secret })
+const validateToolVersions = require('./src/validate_tool_versions')
 
 handler.on('error', function (err) {
     console.error('Error:', err.message)
 })
 
 handler.on('pull_request', function (event) {
-    console.log('Received a pull_request event for %s to %s', event.payload)
+    const payload = event.payload
+    const user = payload.repository.owner.login
+    const repo = payload.repository.name
+    const commitHash = payload.pull_request.head.sha
+    const number = payload.pull_request.number
+
+    const pr = {
+        user,
+        repo,
+        commitHash,
+        number
+    }
+
+    validateToolVersions('api.github.com', pr, () => {
+        debug('Validation done!')
+    })
 })
 
 http
