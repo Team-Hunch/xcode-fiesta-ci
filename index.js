@@ -3,6 +3,7 @@
 require('dotenv').load()
 
 const debug = require('debug')('fiestaci:core')
+const url = require('url')
 
 const secret = process.env.WEBHOOK_SECRET || 'keyboardcat'
 const http = require('http')
@@ -28,7 +29,10 @@ handler.on('pull_request', function (event) {
         number
     }
 
-    validateToolVersions('api.github.com', pr, () => {
+    const repoUrl = payload.repository.url
+    const apiDomain = url.parse(repoUrl).hostname
+
+    validateToolVersions(apiDomain, pr, () => {
         debug('Validation done!')
     })
 })

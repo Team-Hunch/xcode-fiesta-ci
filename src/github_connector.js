@@ -4,6 +4,10 @@ const settings = {
     'api.github.com': {
         token: process.env.GITHUB_TOKEN,
         rootURL: 'https://api.github.com'
+    },
+    'github.schibsted.io': {
+        token: process.env.GITHUB_ENTERPRISE_TOKEN,
+        rootURL: 'https://github.schibsted.io/api/v3/'
     }
 }
 
