@@ -52,6 +52,8 @@ function validate(github, pr) {
 }
 
 function validateToolVersions(apiEndpoint, pr) {
+    debug('Validate for endpoint:', apiEndpoint)
+
     const github = getGithubConnector(apiEndpoint)
 
     return Promise.resolve()

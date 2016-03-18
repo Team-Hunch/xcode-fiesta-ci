@@ -7,7 +7,7 @@ const settings = {
     },
     'github.schibsted.io': {
         token: process.env.GITHUB_ENTERPRISE_TOKEN,
-        rootURL: 'https://github.schibsted.io/api/v3/'
+        rootURL: 'https://github.schibsted.io/api/v3'
     }
 }
 

@@ -32,9 +32,13 @@ handler.on('pull_request', function (event) {
     const repoUrl = payload.repository.url
     const apiDomain = url.parse(repoUrl).hostname
 
-    validateToolVersions(apiDomain, pr, () => {
-        debug('Validation done!')
-    })
+    validateToolVersions(apiDomain, pr)
+        .then(() => {
+            debug('Validation done!')
+        })
+        .catch(err => {
+            debug('Validation error', err)
+        })
 })
 
 http
