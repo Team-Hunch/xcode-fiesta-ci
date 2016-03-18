@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Team-Hunch/xcode-fiesta-ci#readme",
   "dependencies": {
-    "dotenv": "^2.0.0"
+    "dotenv": "^2.0.0",
+    "github-webhook-handler": "^0.5.0"
   }
 }
