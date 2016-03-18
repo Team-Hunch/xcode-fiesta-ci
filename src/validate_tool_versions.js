@@ -57,14 +57,14 @@ function validateToolVersions(apiEndpoint, pr) {
     const github = getGithubConnector(apiEndpoint)
 
     return Promise.resolve()
-        .then(() => updateStatus(github, pr, 'pending'))
+        .then(() => updateStatus(github, pr, 'pending', 'Looking for common problems'))
         .then(() => validate(github, pr))
         .then(success => {
             if (!success) {
                 return updateStatus(github, pr, 'failure', 'There is misplaced view :(')
             }
 
-            return updateStatus(github, pr, 'success')
+            return updateStatus(github, pr, 'success', 'Seems fine!')
         })
 }
 
