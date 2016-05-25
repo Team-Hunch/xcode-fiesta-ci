@@ -9,7 +9,7 @@ const secret = process.env.WEBHOOK_SECRET || 'keyboardcat'
 const http = require('http')
 const createHandler = require('github-webhook-handler')
 const handler = createHandler({ path: '/webhook', secret: secret })
-const validateToolVersions = require('./src/validate_tool_versions')
+const validatePullRequest = require('./src/validate_pull_request')
 
 handler.on('error', function (err) {
     console.error('Error:', err.message)
@@ -32,7 +32,7 @@ handler.on('pull_request', function (event) {
     const repoUrl = payload.repository.url
     const apiDomain = url.parse(repoUrl).hostname
 
-    validateToolVersions(apiDomain, pr)
+    validatePullRequest(apiDomain, pr)
         .then(() => {
             debug('Validation done!')
         })

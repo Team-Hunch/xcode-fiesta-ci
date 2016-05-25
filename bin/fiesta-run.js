@@ -1,7 +1,7 @@
 require('dotenv').load()
 
 const argv = require('minimist')(process.argv.slice(2));
-const validateToolVersion = require('../src/validate_tool_versions')
+const validateToolVersion = require('../src/validate_pull_request')
 
 const apiEndpoint = argv._[0]
 const user = argv._[1]
